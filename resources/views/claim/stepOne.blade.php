@@ -72,10 +72,24 @@
                             <div class="w-full mt-2 py-2  border-gray-700 border-b border-t focus:border-indigo-600"><a href="{{$claim->docs->CTD}}"  target="_blank" class="px-6 py-3 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Показать текущий документ</a></div>
                             <input name="CTD" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="file" value="{{old('CTD')}}">
                         </div>
+                        @if($claim->docs->tech_offer)
+                        <div>
+                            <label class="text-gray-700" for="tech_offer">Техническое предложение</label>
+                            <div class="w-full mt-2 py-2  border-gray-700 border-b border-t focus:border-indigo-600"><a href="{{$claim->docs->tech_offer}}"  target="_blank" class="px-6 py-3 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Показать текущий документ</a></div>
+                            <input name="tech_offer" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="file" value="{{old('tech_offer')}}">
+                        </div>
+                        @endif
+                        @if($claim->docs->OCD)
+                        <div>
+                            <label class="text-gray-700" for="OCD">Схема подключения объекта</label>
+                            <div class="w-full mt-2 py-2  border-gray-700 border-b border-t focus:border-indigo-600"><a href="{{$claim->docs->OCD}}"  target="_blank" class="px-6 py-3 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Показать текущий документ</a></div>
+                            <input name="OCD" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="file" value="{{old('OCD')}}">
+                        </div>
+                        @endif
                     </div>
 
                     <div class="flex justify-end mt-4">
-                        <button class="px-4 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700">Save</button>
+                        <button class="px-4 py-2 bg-red-800 text-gray-200 rounded-md hover:bg-red-700 focus:outline-none focus:bg-red-700">Сохранить</button>
                     </div>
                 </form>
             </div>

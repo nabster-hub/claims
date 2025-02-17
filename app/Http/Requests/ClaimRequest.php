@@ -21,18 +21,37 @@ class ClaimRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'full_name' => 'required|string',
             'address' => 'required|string',
             'phone' => 'required',
             'power' => 'required|string',
             'con_point' => 'required|string',
-            'claim' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
-            'questionnaire' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
-            'cal_power' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
-            'CTD' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
         ];
+
+        if($this->method() == 'POST') {
+            $rules += [
+                'claim' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+                'questionnaire' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+                'cal_power' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+                'CTD' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+            ];
+        }
+
+        if($this->method() == 'PUT' || $this->method() == 'PATCH') {
+            $rules += [
+                'claim' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+                'questionnaire' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+                'cal_power' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+                'CTD' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+                'tech_offer' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+                'OCD' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+            ];
+        }
+
+        return $rules;
     }
+
 
     public function messages(): array
     {

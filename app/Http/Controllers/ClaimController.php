@@ -134,7 +134,7 @@ class ClaimController extends Controller
             'last_edit_user' => $this->user_id,
         ]);
 
-        $comment = Comment::created([
+        Comment::create([
             'claim_id' => $claim->id,
             'user_id' => $this->user_id,
             'content' => $validated['comment'],
@@ -201,9 +201,29 @@ class ClaimController extends Controller
         return redirect()->route('dashboard')->with('success', "Заявка #$claim->id одобрен");
     }
 
-    public function update(ClaimRequest $request)
+    public function update(Claim $claim, ClaimRequest $request)
     {
+        $this->authorize('update', $claim);
+        $FileUpload = new FileController();
+        $FileUpload->loadMore($request->file('OCD'), (string) $claim->docs->claim);
+        $data = $request->validated();
+        $files = array();
 
+        try {
+            foreach ($request->allFiles() as $key => $file) {
+                $files[$key] = $FileUpload->loadMore($request->file($key), (string) $claim->docs->claim);
+                $FileUpload->destroy($claim->docs->$key);
+                $claim->docs()->update([$key => $files[$key]]);
+            }
+            $claim->update([
+                'status' => 3,
+                'last_edit_user' => $this->user_id,
+            ]);
+        }catch (\Exception $exception){
+            return redirect()->back()->withErrors(['error' => $exception->getMessage()]);
+        }
+
+        return redirect()->route('dashboard')->with(['success' => "Заявка #$claim->id исправлена и отправлена на согласования"]);
 
     }
     public function destroy(Claim $claim)

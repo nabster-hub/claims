@@ -36,4 +36,13 @@ class FileController extends Controller
         $url = Storage::url($filePath);
         return $url;
     }
+
+    public function destroy(string $oldFilePath) : void
+    {
+        $file = str_replace('/storage/', '', $oldFilePath);
+
+        if(Storage::disk('public')->exists($file)){
+            storage::disk('public')->delete($file);
+        }
+    }
 }

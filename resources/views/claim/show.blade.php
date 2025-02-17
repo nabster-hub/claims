@@ -60,11 +60,11 @@
                                 <label class="text-gray-700" for="OCD">Схема подключения объекта</label>
                                 <div class="w-full mt-2 py-2  border-gray-700 border-b border-t focus:border-indigo-600"><a href="{{$claim->docs->OCD}}"  target="_blank"><button class="px-6 py-3 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Показать</button></a></div>
                             </div>
-                        @endif
                             <div>
                                 <label class="text-gray-700" for="tech_offer">Техническое предложение</label>
                                 <div class="w-full mt-2 py-2  border-gray-700 border-b border-t focus:border-indigo-600"><a href="{{$claim->docs->tech_offer}}"  target="_blank"><button class="px-6 py-3 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Показать</button></a></div>
                             </div>
+                        @endif
                         @if($claim->status ==4 )
                             <div>
                                 <label class="text-gray-700" for="tech_condition">Техническое условие</label>
