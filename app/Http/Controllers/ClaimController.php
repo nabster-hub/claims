@@ -37,7 +37,7 @@ class ClaimController extends Controller
 
     public function allClaims()
     {
-        $claims = Claim::byRegion($this->region_id, $this->user_id)->latest()->paginate(10);
+        $claims = Claim::byRegion($this->region_id, $this->user_id)->orderBy('updated_at', 'desc')->paginate(10);
         return view('claim.allClaims', compact('claims'));
     }
 
