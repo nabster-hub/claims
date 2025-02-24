@@ -22,10 +22,17 @@
                     @csrf
                     <div class="grid grid-cols-1 gap-6 mt-4">
                         <div>
+                            <label class="text-gray-700" for="type">Типа заявления</label>
+                            <select name="type" required>
+                                <option value="" disabled {{ old('type') ? '' : 'selected' }}>Выберите тип завялвения</option>
+                                <option value="1" {{ old('type') == '1' ? 'selected' : '' }}>От физ. лиц (внутри района)</option>
+                                <option value="2" {{ old('type') == '2' ? 'selected' : '' }}>От Юр. лиц</option>
+                            </select>
+                        </div>
+                        <div>
                             <label class="text-gray-700" for="full_name">Ф.И.О абонента или наименования объекта</label>
                             <input name="full_name" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('full_name')}}">
                         </div>
-
                         <div>
                             <label class="text-gray-700" for="address">Адрес и моего расположения объекта</label>
                             <input name="address" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('address')}}">
@@ -37,12 +44,23 @@
                         </div>
 
                         <div>
-                            <label class="text-gray-700" for="power">Мощность</label>
+                            <label class="text-gray-700" for="power">Мощность квт.ч.</label>
                             <input name="power" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('power')}}">
                         </div>
-                        <div>
-                            <label class="text-gray-700" for="con_point">Точка подключения ПС - ВЛ - КЛ - КТП - 10/0,4кВ</label>
-                            <input name="con_point" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('con_point')}}">
+                        <div class="text-gray-700">
+                            <span>Точка подключения: </span>
+                        </div>
+                        <div class="ml-4">
+                            <label class="text-gray-700" for="pc">ПС</label>
+                            <input name="pc" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('pc')}}">
+                        </div>
+                        <div class="ml-4">
+                            <label class="text-gray-700" for="vl">ВЛ/КЛ</label>
+                            <input name="vl" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('vl')}}">
+                        </div>
+                        <div class="ml-4">
+                            <label class="text-gray-700" for="tp">КТП</label>
+                            <input name="tp" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('tp')}}">
                         </div>
                         <div>
                             <label class="text-gray-700" for="claim">Заявление</label>
@@ -63,7 +81,7 @@
                     </div>
 
                     <div class="flex justify-end mt-4">
-                        <button class="px-4 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700">Save</button>
+                        <button class="px-4 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700">Создать</button>
                     </div>
                 </form>
             </div>

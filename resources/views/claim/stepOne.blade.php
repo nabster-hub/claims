@@ -48,9 +48,20 @@
                             <label class="text-gray-700" for="power">Мощность</label>
                             <input name="power" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{$claim->power}}">
                         </div>
-                        <div>
-                            <label class="text-gray-700" for="con_point">Точка подключения ПС - ВЛ - КЛ - КТП - 10/0,4кВ</label>
-                            <input name="con_point" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{$claim->con_point}}">
+                        <div class="text-gray-700">
+                            <span>Точка подключения: </span>
+                        </div>
+                        <div class="ml-4">
+                            <label class="text-gray-700" for="pc">ПС</label>
+                            <input name="pc" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{$claim->connection->pc}}">
+                        </div>
+                        <div class="ml-4">
+                            <label class="text-gray-700" for="vl">ВЛ/КЛ</label>
+                            <input name="vl" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{$claim->connection->vl}}">
+                        </div>
+                        <div class="ml-4">
+                            <label class="text-gray-700" for="tp">КТП</label>
+                            <input name="tp" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{$claim->connection->tp}}">
                         </div>
                         <div>
                             <label class="text-gray-700" for="claim">Заявление</label>

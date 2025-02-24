@@ -7,6 +7,7 @@ use App\Http\Requests\CommentRequest;
 use App\Http\Requests\DocsRequest;
 use App\Models\Claim;
 use App\Models\Comment;
+use App\Models\ConnectPoint;
 use App\Models\Docs;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -55,14 +56,24 @@ class ClaimController extends Controller
         $user = User::find($user_id)->with('region')->first();
         $region_id = $user->region->id;
 
+        $connect = ConnectPoint::create([
+            'pc' => $validated['pc'],
+            'vl' => $validated['vl'],
+            'tp' => $validated['tp'],
+        ]);
+
+        $connect->save();
+
         $query = Claim::create([
             'full_name' => $validated['full_name'],
             'address' => $validated['address'],
             'phone' => $validated['phone'],
             'power' => $validated['power'],
-            'con_point' => $validated['con_point'],
+            'connect_id' => $connect->id,
             'user_id' => $user_id,
             'status' => 2 ,
+            'type' => $validated['type'],
+
         ]);
 
         $query->save();

@@ -49,6 +49,8 @@ class ClaimPolicy
     {
         if($user->region_id == 12){
             return true;
+        }elseif($user->id == $claim->user_id && $claim->type == 1){
+            return true;
         }
         return false;
     }

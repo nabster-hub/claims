@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('connect_points', function (Blueprint $table) {
             $table->id();
             $table->string('pc');
-            $table->string('vl');
-            $table->string('tp');
+            $table->string('vl')->nullable();
+            $table->string('tp')->nullable();
             $table->timestamps();
         });
     }

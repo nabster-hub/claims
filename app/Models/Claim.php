@@ -15,7 +15,8 @@ class Claim extends Model
         'address',
         'phone',
         'power',
-        'con_point',
+        'connect_id',
+        'type',
         'user_id',
         'status',
     ];
@@ -33,6 +34,11 @@ class Claim extends Model
     public function step()
     {
         return $this->hasOne(Step::class, 'id', 'status');
+    }
+
+    public function connection()
+    {
+        return $this->hasOne(ConnectPoint::class, 'id', 'connect_id');
     }
 
     public function comments()

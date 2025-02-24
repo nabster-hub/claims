@@ -19,6 +19,7 @@
                 <form method="POST" action="{{route('claim.stepThreeUpdate', $claim->id)}}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    <input type="hidden" name="step" value="3">
                 <div class="grid grid-cols-1 gap-6 mt-4">
                     <div>
                         <label class="text-gray-700">Дней в работе</label>
@@ -43,8 +44,8 @@
                         <div  class="form-input w-full mt-2 rounded-md focus:border-indigo-600">{{$claim->power}}</div>
                     </div>
                     <div>
-                        <label class="text-gray-700" for="con_point">Точка подключения ПС - ВЛ - КЛ - КТП - 10/0,4кВ</label>
-                        <div class="form-input w-full mt-2 rounded-md focus:border-indigo-600">{{$claim->con_point}}</div>
+                        <label class="text-gray-700" for="con_point">Точка подключения ПС - ВЛ/КЛ - КТП</label>
+                        <div class="form-input w-full mt-2 rounded-md focus:border-indigo-600">{{$claim->connection->pc}} - {{$claim->connection->vl}} - {{$claim->connection->tp}}</div>
                     </div>
                     <div>
                         <label class="text-gray-700" for="claim">Заявление</label>

@@ -22,13 +22,23 @@ class DocsRequest extends FormRequest
     public function rules(): array
     {
         $rules = [];
-        if($this->has('tech_offer')){
+
+        if($this->input('step') == 2){
             $rules['tech_offer'] = 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240';
-        }
-        if($this->has('OCD')){
             $rules['OCD'] = 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240';
         }
-        if($this->has('tech_condition')){
+
+        if($this->input('step') == 3){
+            $rules['tech_condition'] = 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240';
+        }
+
+        if($this->hasFile('tech_offer')){
+            $rules['tech_offer'] = 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240';
+        }
+        if($this->hasFile('OCD')){
+            $rules['OCD'] = 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240';
+        }
+        if($this->hasFile('tech_condition')){
             $rules['tech_condition'] = 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240';
         }
 

@@ -16,11 +16,12 @@ return new class extends Migration
             $table->string('full_name');
             $table->string('address');
             $table->string('phone');
-            $table->string('power');
-            $table->string('con_point');
+            $table->integer('power')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->integer('last_edit_user')->unsigned()->nullable();
             $table->smallInteger('status')->unsigned();
+            $table->bigInteger('connect_id')->unsigned()->nullable();
+            $table->smallInteger('type')->unsigned();
             $table->timestamps();
         });
     }

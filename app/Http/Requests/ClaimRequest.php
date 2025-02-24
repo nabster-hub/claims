@@ -25,8 +25,11 @@ class ClaimRequest extends FormRequest
             'full_name' => 'required|string',
             'address' => 'required|string',
             'phone' => 'required',
-            'power' => 'required|string',
-            'con_point' => 'required|string',
+            'power' => 'required|integer',
+            'pc' => 'required|string',
+            'vl' => 'nullable|string',
+            'tp' => 'nullable|string',
+            'type' => 'required|integer',
         ];
 
         if($this->method() == 'POST') {
@@ -60,7 +63,8 @@ class ClaimRequest extends FormRequest
             'address.required' => 'Адрес и моего расположения объекта - является обязательным для заполнения',
             'phone.required' => 'Контакты - является обязательным для заполнения',
             'power.required' => 'Мощность - является обязательным для заполнения',
-            'con_point.required' => 'Точка подключения ПС - ВЛ - КЛ - КТП - 10/0,4кВ - является обязательным для заполнения',
+            'type.required' => 'Тип заявления обязателен - является обязательным для заполнения',
+            'pc.required' => 'Точка подключения ПС - является обязательным для заполнения',
             'claim.required' => 'Заявление - является обязательным для заполнения',
             'claim.mimes' => 'Файл Заявления должен быть в формате jpeg, png, jpg, gif, svg, pdf, doc, docx',
             'claim.max' => 'Файл Заявления не должен привышать 10 МБ.',
