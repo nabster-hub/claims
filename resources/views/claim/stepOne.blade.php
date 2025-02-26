@@ -28,6 +28,7 @@
                 <form action="{{route('claim.update', $claim->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    <input type="hidden" name="step" value="1">
                     <div class="grid grid-cols-1 gap-6 mt-4">
                         <div>
                             <label class="text-gray-700" for="full_name">Ф.И.О абонента или наименования объекта</label>

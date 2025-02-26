@@ -29,7 +29,6 @@ class ClaimRequest extends FormRequest
             'pc' => 'required|string',
             'vl' => 'nullable|string',
             'tp' => 'nullable|string',
-            'type' => 'required|integer',
         ];
 
         if($this->method() == 'POST') {
@@ -38,10 +37,11 @@ class ClaimRequest extends FormRequest
                 'questionnaire' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
                 'cal_power' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
                 'CTD' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+                'type' => 'required|integer',
             ];
         }
 
-        if($this->method() == 'PUT' || $this->method() == 'PATCH') {
+        if(($this->method() == 'PUT' || $this->method() == 'PATCH') && $this->input("step") != 1) {
             $rules += [
                 'claim' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
                 'questionnaire' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
@@ -49,6 +49,18 @@ class ClaimRequest extends FormRequest
                 'CTD' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
                 'tech_offer' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
                 'OCD' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+                'type' => 'nullable|integer',
+            ];
+        }
+        if(($this->method() == 'PUT' || $this->method() == 'PATCH') && $this->input("step") == 1) {
+            $rules += [
+                'claim' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+                'questionnaire' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+                'cal_power' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+                'CTD' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+                'tech_offer' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+                'OCD' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
+                'type' => 'nullable|integer',
             ];
         }
 

@@ -157,7 +157,7 @@
 
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-semibold">{{ $claim->power }}</td>
 
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-semibold">{{ $claim->con_point }}</td>
+                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-semibold">{{$claim->connection->pc}} - {{$claim->connection->vl}} - {{$claim->connection->tp}}</td>
 
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-semibold">{{ $claim->user->region->name }}</td>
 

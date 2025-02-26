@@ -216,8 +216,9 @@ class ClaimController extends Controller
     {
         $this->authorize('update', $claim);
         $FileUpload = new FileController();
-        $FileUpload->loadMore($request->file('OCD'), (string) $claim->docs->claim);
+
         $data = $request->validated();
+
         $files = array();
 
         try {
@@ -229,6 +230,11 @@ class ClaimController extends Controller
             $claim->update([
                 'status' => 3,
                 'last_edit_user' => $this->user_id,
+            ]);
+            $claim->connection()->update([
+                'pc' => $data['pc'],
+                'vl' => $data['vl'],
+                'tp' => $data['tp'],
             ]);
         }catch (\Exception $exception){
             return redirect()->back()->withErrors(['error' => $exception->getMessage()]);
