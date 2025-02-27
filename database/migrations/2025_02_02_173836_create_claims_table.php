@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('full_name');
             $table->string('address');
             $table->string('phone');
-            $table->integer('power')->unsigned();
+            $table->decimal('power')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->integer('last_edit_user')->unsigned()->nullable();
             $table->smallInteger('status')->unsigned();

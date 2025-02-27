@@ -227,8 +227,14 @@ class ClaimController extends Controller
                 $FileUpload->destroy($claim->docs->$key);
                 $claim->docs()->update([$key => $files[$key]]);
             }
+
+            if(!$claim->docs->tech_offer && !$claim->docs->OCD){
+                $status = 2;
+            }else{
+                $status = 3;
+            }
             $claim->update([
-                'status' => 3,
+                'status' => $status,
                 'last_edit_user' => $this->user_id,
             ]);
             $claim->connection()->update([

@@ -45,7 +45,7 @@
 
                         <div>
                             <label class="text-gray-700" for="power">Мощность квт.ч.</label>
-                            <input name="power" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('power')}}">
+                            <input name="power" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="number" value="{{old('power')}}">
                         </div>
                         <div class="text-gray-700">
                             <span>Точка подключения: </span>
@@ -81,7 +81,9 @@
                     </div>
 
                     <div class="flex justify-end mt-4">
-                        <button class="px-4 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700">Создать</button>
+                        <button class="px-4 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+                                onclick="this.disabled = true; this.innerText='Создаётся...'; this.form.submit();"
+                        >Создать</button>
                     </div>
                 </form>
             </div>
