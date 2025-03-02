@@ -180,11 +180,16 @@ class ClaimController extends Controller
             $files['OCD'] = $FileUpload->loadMore($request->file('OCD'), (string) $claim->docs->claim);
         }
 
-
-        $claim->docs()->update([
-            'tech_offer' => $files['tech_offer'],
+        $upData = [
             'OCD' => $files['OCD'],
-        ]);
+            ];
+
+        if($claim->type == 2)
+            $upData['tech_offer'] = $files['tech_offer'];
+
+
+
+        $claim->docs()->update($upData);
 
         return redirect()->route('dashboard')->with('success', "Заявка #$claim->id отправленна на согласования");
     }

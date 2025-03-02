@@ -42,10 +42,12 @@
                         <label class="text-gray-700" for="tp">КТП</label>
                         <input name="tp" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('tp')}}">
                     </div>
+                    @if($claim->type == 2)
                     <div>
                         <label class="text-gray-700" for="tech_offer">Техническое предложение</label>
                         <input name="tech_offer" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="file" value="{{old('tech_offer')}}">
                     </div>
+                    @endif
                     <div>
                         <label class="text-gray-700" for="OCD">Схема подключения объекта</label>
                         <input name="OCD" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="file" value="{{old('OCD')}}">

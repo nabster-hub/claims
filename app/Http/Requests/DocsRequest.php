@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Claim;
 use Illuminate\Foundation\Http\FormRequest;
 
 class DocsRequest extends FormRequest
@@ -23,6 +24,8 @@ class DocsRequest extends FormRequest
     {
         $rules = [];
 
+        $claim = $this->route('claim');
+
         if($this->input('step') == 2){
             $rules['tech_offer'] = 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240';
             $rules['OCD'] = 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240';
@@ -30,6 +33,7 @@ class DocsRequest extends FormRequest
             $rules['vl'] = 'nullable|string';
             $rules['tp'] = 'nullable|string';
         }
+
 
         if($this->input('step') == 3){
             $rules['tech_condition'] = 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240';
@@ -44,9 +48,13 @@ class DocsRequest extends FormRequest
         if($this->hasFile('tech_condition')){
             $rules['tech_condition'] = 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240';
         }
+        if($claim && $claim->type == 1){
+            $rules['tech_offer'] = 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf|max:10240';
+        }
 
         return $rules;
     }
+
 
     public function messages(): array
     {
