@@ -47,21 +47,7 @@
                             <label class="text-gray-700" for="power">Мощность квт.ч.</label>
                             <input name="power" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="number" value="{{old('power')}}">
                         </div>
-                        <div class="text-gray-700">
-                            <span>Точка подключения: </span>
-                        </div>
-                        <div class="ml-4">
-                            <label class="text-gray-700" for="pc">ПС</label>
-                            <input name="pc" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('pc')}}">
-                        </div>
-                        <div class="ml-4">
-                            <label class="text-gray-700" for="vl">ВЛ/КЛ</label>
-                            <input name="vl" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('vl')}}">
-                        </div>
-                        <div class="ml-4">
-                            <label class="text-gray-700" for="tp">КТП</label>
-                            <input name="tp" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('tp')}}">
-                        </div>
+
                         <div>
                             <label class="text-gray-700" for="claim">Заявление</label>
                             <input name="claim" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="file" value="{{old('claim')}}">

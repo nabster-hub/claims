@@ -32,7 +32,12 @@
                         </div>
                         <div>
                             <label class="text-gray-700" for="con_point">Точка подключения ПС - ВЛ/КЛ - КТП</label>
-                            <div class="form-input w-full mt-2 rounded-md focus:border-indigo-600">{{$claim->connection->pc}} - {{$claim->connection->vl}} - {{$claim->connection->tp}}</div>
+                            <div class="form-input w-full mt-2 rounded-md focus:border-indigo-600">
+                                @if($claim->connection)
+                                 {{$claim->connection->pc}} - {{$claim->connection->vl}} - {{$claim->connection->tp}}</div>
+                                @else
+                                    Нету данных
+                                @endif
                         </div>
                         <div>
                             <label class="text-gray-700" for="claim">Заявление</label>

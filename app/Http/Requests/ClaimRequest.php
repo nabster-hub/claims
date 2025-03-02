@@ -39,6 +39,7 @@ class ClaimRequest extends FormRequest
                 'CTD' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:40960',
                 'type' => 'required|integer',
             ];
+            $rules['pc'] = 'nullable|string';
         }
 
         if(($this->method() == 'PUT' || $this->method() == 'PATCH') && $this->input("step") != 1) {

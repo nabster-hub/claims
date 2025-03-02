@@ -56,20 +56,19 @@ class ClaimController extends Controller
         $user = User::find($user_id)->with('region')->first();
         $region_id = $user->region->id;
 
-        $connect = ConnectPoint::create([
-            'pc' => $validated['pc'],
-            'vl' => $validated['vl'],
-            'tp' => $validated['tp'],
-        ]);
-
-        $connect->save();
+//        $connect = ConnectPoint::create([
+//            'pc' => $validated['pc'],
+//            'vl' => $validated['vl'],
+//            'tp' => $validated['tp'],
+//        ]);
+//
+//        $connect->save();
 
         $query = Claim::create([
             'full_name' => $validated['full_name'],
             'address' => $validated['address'],
             'phone' => $validated['phone'],
             'power' => $validated['power'],
-            'connect_id' => $connect->id,
             'user_id' => $user_id,
             'status' => 2 ,
             'type' => $validated['type'],
@@ -160,9 +159,17 @@ class ClaimController extends Controller
         $FileUpload = new FileController();
 
         $validated = $request->validated();
+        $connect = ConnectPoint::create([
+            'pc' => $validated['pc'],
+            'vl' => $validated['vl'],
+            'tp' => $validated['tp'],
+        ]);
+
+        $connect->save();
 
         $claim->update([
             'status' => 3,
+            'connect_id' => $connect->id,
             'last_edit_user' => $this->user_id,
         ]);
 
@@ -217,7 +224,11 @@ class ClaimController extends Controller
         $this->authorize('update', $claim);
         $FileUpload = new FileController();
 
-        $data = $request->validated();
+        $data = array_filter($request->validated(), function ($value){
+            return !is_null($value);
+        });
+
+        //dd($data);
 
         $files = array();
 
@@ -228,19 +239,24 @@ class ClaimController extends Controller
                 $claim->docs()->update([$key => $files[$key]]);
             }
 
-            if(!$claim->docs->tech_offer && !$claim->docs->OCD){
-                $status = 2;
-            }else{
-                $status = 3;
-            }
-            $claim->update([
+            $status = (!$claim->docs->tech_offer && !$claim->docs->OCD) ? 2 : 3;
+
+
+            $updateData = array_filter([
+                'full_name' => $data['full_name'] ?? $claim->full_name,
+                'address' => $data['address'] ?? $claim->address,
+                'phone' => $data['phone'] ?? $claim->phone,
+                'power' => $data['power'] ?? $claim->power,
                 'status' => $status,
                 'last_edit_user' => $this->user_id,
             ]);
+
+            $claim->update($updateData);
+
             $claim->connection()->update([
                 'pc' => $data['pc'],
-                'vl' => $data['vl'],
-                'tp' => $data['tp'],
+                'vl' => $data['vl'] ?? "",
+                'tp' => $data['tp'] ?? "",
             ]);
         }catch (\Exception $exception){
             return redirect()->back()->withErrors(['error' => $exception->getMessage()]);

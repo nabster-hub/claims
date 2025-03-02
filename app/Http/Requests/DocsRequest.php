@@ -26,6 +26,9 @@ class DocsRequest extends FormRequest
         if($this->input('step') == 2){
             $rules['tech_offer'] = 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240';
             $rules['OCD'] = 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240';
+            $rules['pc'] = 'required|string';
+            $rules['vl'] = 'nullable|string';
+            $rules['tp'] = 'nullable|string';
         }
 
         if($this->input('step') == 3){

@@ -27,6 +27,21 @@
                         <label class="text-gray-700" for="full_name">Ф.И.О абонента или наименования объекта</label>
                         <div class="form-input w-full mt-2 rounded-md focus:border-indigo-600">{{$claim->full_name}}</div>
                     </div>
+                    <div class="text-gray-700">
+                        <span>Точка подключения: </span>
+                    </div>
+                    <div class="ml-4">
+                        <label class="text-gray-700" for="pc">ПС</label>
+                        <input name="pc" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('pc')}}">
+                    </div>
+                    <div class="ml-4">
+                        <label class="text-gray-700" for="vl">ВЛ/КЛ</label>
+                        <input name="vl" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('vl')}}">
+                    </div>
+                    <div class="ml-4">
+                        <label class="text-gray-700" for="tp">КТП</label>
+                        <input name="tp" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('tp')}}">
+                    </div>
                     <div>
                         <label class="text-gray-700" for="tech_offer">Техническое предложение</label>
                         <input name="tech_offer" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="file" value="{{old('tech_offer')}}">
@@ -48,10 +63,6 @@
                     <div>
                         <label class="text-gray-700" for="power">Мощность</label>
                         <div  class="form-input w-full mt-2 rounded-md focus:border-indigo-600">{{$claim->power}}</div>
-                    </div>
-                    <div>
-                        <label class="text-gray-700" for="con_point">Точка подключения ПС - ВЛ/КЛ - КТП</label>
-                        <div class="form-input w-full mt-2 rounded-md focus:border-indigo-600">{{$claim->connection->pc}} - {{$claim->connection->vl}} - {{$claim->connection->tp}}</div>
                     </div>
                     <div>
                         <label class="text-gray-700" for="claim">Заявление</label>
