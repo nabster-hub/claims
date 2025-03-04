@@ -116,7 +116,7 @@
                                     {{ $claim->getWorkingDays() }}
                                 </td>
                                 <td class="px-1 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-                                    @if((Auth::user()->region_id===12 && $claim->status === 3) || (Auth::user()->id === $claim->user_id && $claim->status === 3 && $claim->type === 1))
+                                    @if((Auth::user()->region_id===12 && $claim->status === 3 && $claim->type != 1) || (Auth::user()->id === $claim->user_id && $claim->status === 3 && $claim->type === 1))
                                         <a href="{{route('claim.stepThree', $claim->id)}}"
                                            class="bg-green-800 p-2 border border-gray-700 rounded-lg text-white
                                        hover:bg-green-600 text-center transition-all flex justify-center">Шаг 3</a>
