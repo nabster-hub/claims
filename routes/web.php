@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use \App\Http\Controllers\ClaimController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,10 @@ Route::middleware('auth')->group(function () {
    Route::get('/claim/{claim}', [ClaimController::class, 'show'])->name('claim.show');
    Route::delete('/claim/{claim}', [ClaimController::class, 'destroy'])->name('claim.destroy');
    Route::put('/claim/{claim}', [ClaimController::class, 'update'])->name('claim.update');
+});
+
+Route::prefix("panel")->middleware('auth')->group(function () {
+   Route::get('/', [AdminController::class, 'index'])->name('panel.index');
 });
 
 Route::middleware('auth')->prefix('reports')->group(function () {
