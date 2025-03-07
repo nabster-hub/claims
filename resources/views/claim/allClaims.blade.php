@@ -74,7 +74,7 @@
                         </thead>
                         <tbody class="bg-white">
                         @foreach($claims as $claim)
-                            <tr>
+                            <tr @if($claim->type === 1) class="fiz-lic" @endif>
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
                                     <div class="flex items-center">
                                         <div class="ml-4">
@@ -108,7 +108,7 @@
                                 </td>
 
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm
-                            leading-5 font-semibold text-center
+                            leading-5 font-semibold text-center bg-green-100
                             @if($claim->getWorkingDays() <= 3 && $claim->status !== 4) bg-green-100 text-green-800
                             @elseif($claim->getWorkingDays() <=5 && $claim->status !== 4) bg-yellow-100 text-yellow-800
                             @elseif($claim->getWorkingDays() > 5 && $claim->status !== 4) bg-red-100 text-red-800 @endif">
