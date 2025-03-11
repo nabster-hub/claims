@@ -93,7 +93,7 @@
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold ">{{ $claim->phone }}</span>
                                 </td>
 
-                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-semibold">{{ $claim->power }}</td>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-semibold">{{ round($claim->power, 1) }} квт</td>
 
                                 <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 font-semibold">
                                     @if($claim->connection)

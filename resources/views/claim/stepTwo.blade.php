@@ -64,7 +64,7 @@
 
                     <div>
                         <label class="text-gray-700" for="power">Мощность</label>
-                        <div  class="form-input w-full mt-2 rounded-md focus:border-indigo-600">{{$claim->power}}</div>
+                        <div  class="form-input w-full mt-2 rounded-md focus:border-indigo-600">{{ round($claim->power, 1) }} квт</div>
                     </div>
                     <div>
                         <label class="text-gray-700" for="claim">Заявление</label>
