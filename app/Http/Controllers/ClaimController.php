@@ -9,10 +9,12 @@ use App\Models\Claim;
 use App\Models\Comment;
 use App\Models\ConnectPoint;
 use App\Models\Docs;
+use App\Models\Region;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 
 
 class ClaimController extends Controller
@@ -36,10 +38,49 @@ class ClaimController extends Controller
         return view('claim.index', compact('claims', 'newClaims', 'closedClaims'));
     }
 
-    public function allClaims()
+    public function allClaims(Request $request)
     {
-        $claims = Claim::byRegion($this->region_id, $this->user_id)->orderBy('updated_at', 'desc')->paginate(10);
-        return view('claim.allClaims', compact('claims'));
+        $query = Claim::byRegion($this->region_id, $this->user_id);
+        $regions = Region::all();
+
+        if($request->filled('region')){
+            $region = (int) $request->input('region');
+            $query->whereHas('user', function ($query) use ($region) {
+                $query->where('region_id', $region);
+            });
+        }
+        if($request->filled('day')){
+            $day = (int) $request->input('day');
+
+            $claimsAll = Claim::byRegion($this->region_id, $this->user_id)
+            ->orderBy('updated_at', 'desc')
+            ->get()
+            ->filter(function ($claim) use ($day) {
+               if($day){
+                   return $claim->getWorkingDays() == $day;
+               }
+               return true;
+            });
+        }
+
+
+        if($request->filled('day')){
+            $claims = new \Illuminate\Pagination\LengthAwarePaginator(
+                $claimsAll->forPage(Paginator::resolveCurrentPage(), 10),
+                $claimsAll->count(),
+                10,
+                Paginator::resolveCurrentPage(),
+                ['path' => Paginator::resolveCurrentPath()]
+            );
+        }else{
+            $claims = $query->orderBy('updated_at', 'desc')->paginate(10);
+        }
+
+
+
+
+
+        return view('claim.allClaims', compact('claims', 'regions'));
     }
 
     public function create()
