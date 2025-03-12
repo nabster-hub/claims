@@ -57,7 +57,7 @@ class ClaimController extends Controller
             ->get()
             ->filter(function ($claim) use ($day) {
                if($day){
-                   return $claim->getWorkingDays() == $day;
+                   return $claim->getWorkingDays() >= $day;
                }
                return true;
             });
