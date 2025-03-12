@@ -52,7 +52,7 @@ class ClaimController extends Controller
         if($request->filled('day')){
             $day = (int) $request->input('day');
 
-            $claimsAll = Claim::byRegion($this->region_id, $this->user_id)
+            $claimsAll = Claim::byRegion($this->region_id, $this->user_id)->where('status', '!=', 4)
             ->orderBy('updated_at', 'desc')
             ->get()
             ->filter(function ($claim) use ($day) {
@@ -70,7 +70,10 @@ class ClaimController extends Controller
                 $claimsAll->count(),
                 10,
                 Paginator::resolveCurrentPage(),
-                ['path' => Paginator::resolveCurrentPath()]
+                [
+                    'path' => Paginator::resolveCurrentPath(),
+                    'query' => request()->query(),
+                ]
             );
         }else{
             $claims = $query->orderBy('updated_at', 'desc')->paginate(10);

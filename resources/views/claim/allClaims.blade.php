@@ -145,7 +145,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                        {{$claims->links()}}
+                    {{ $claims->appends(request()->query())->links() }}
                 </div>
             </div>
         </div>
