@@ -43,6 +43,8 @@ class ClaimController extends Controller
         $query = Claim::byRegion($this->region_id, $this->user_id);
         $regions = Region::all();
 
+
+
         if($request->filled('region')){
             $region = (int) $request->input('region');
             $query->whereHas('user', function ($query) use ($region) {
@@ -63,6 +65,20 @@ class ClaimController extends Controller
             });
         }
 
+        if($request->filled('search')){
+            $search = $request->input('search');
+
+            $query->where(function ($q) use ($search) {
+                $q->where('full_name', 'LIKE', '%' . $search . '%')
+                    ->orWhere('address', 'LIKE', '%' . $search . '%')
+                    ->orWhere('phone', 'LIKE', '%' . $search . '%')
+                    ->orWhere('power', 'LIKE', '%' . $search . '%')
+                    ->orWhere('reg_num', 'LIKE', '%' . $search . '%')
+                    ->orWhere('reg_date', 'LIKE', '%' . $search . '%');
+            });
+        }
+
+
 
         if($request->filled('day')){
             $claims = new \Illuminate\Pagination\LengthAwarePaginator(
@@ -76,8 +92,9 @@ class ClaimController extends Controller
                 ]
             );
         }else{
-            $claims = $query->orderBy('updated_at', 'desc')->paginate(10);
+            $claims = $query->orderBy('updated_at', 'desc')->paginate(10)->appends(request()->query());
         }
+
 
 
 
