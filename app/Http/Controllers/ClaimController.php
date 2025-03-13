@@ -250,10 +250,11 @@ class ClaimController extends Controller
         $FileUpload = new FileController();
 
         $validated = $request->validated();
-
         $claim->update([
             'status' => 4,
             'last_edit_user' => $this->user_id,
+            'reg_num' => $validated['reg_num'],
+            'reg_date' => $validated['reg_date'],
         ]);
 
         if($request->hasFile('tech_condition')){

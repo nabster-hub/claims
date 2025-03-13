@@ -22,6 +22,8 @@ return new class extends Migration
             $table->smallInteger('status')->unsigned();
             $table->bigInteger('connect_id')->unsigned()->nullable();
             $table->smallInteger('type')->unsigned();
+            $table->string('reg_num')->nullable();
+            $table->date('reg_date')->nullable();
             $table->timestamps();
         });
     }

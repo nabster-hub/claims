@@ -37,6 +37,8 @@ class DocsRequest extends FormRequest
 
         if($this->input('step') == 3){
             $rules['tech_condition'] = 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240';
+            $rules['reg_num'] = 'required|string';
+            $rules['reg_date'] = 'required|date';
         }
 
         if($this->hasFile('tech_offer')){
@@ -68,6 +70,9 @@ class DocsRequest extends FormRequest
             'tech_condition.required' => 'Технические условия - является обязательным для заполнения',
             'tech_condition.mimes' => 'Файл Технические условия должен быть в формате jpeg, png, jpg, gif, svg, pdf, doc, docx',
             'tech_condition.max' => 'Файл Технические условия не должен привышать 10 МБ.',
+            'reg_num.required' => 'Номер технического условия обязателен для заполнения',
+            'reg_date.required' => 'Дата выдачи техничекого условия обязательно для заполнения',
+            'reg_date.date' => 'Дата выдачи техничекого условия должна быть валидная дата',
         ];
     }
 }

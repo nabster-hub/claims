@@ -77,6 +77,14 @@
                         <label class="text-gray-700" for="tech_condition">Техническое условие</label>
                         <input name="tech_condition" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="file" value="{{old('tech_condition')}}">
                     </div>
+                    <div>
+                        <label class="text-gray-700" for="reg_num">Номер техничекого условия</label>
+                        <input name="reg_num" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('reg_num')}}">
+                    </div>
+                    <div>
+                        <label class="text-gray-700" for="reg_date">Дата выдачи техничекого условия</label>
+                        <input name="reg_date" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="date" value="{{old('reg_date')}}">
+                    </div>
                 </div>
                     <div class="flex justify-end gap-4 mt-4">
                         @if($claim->status === 3)

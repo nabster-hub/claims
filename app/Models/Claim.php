@@ -19,6 +19,12 @@ class Claim extends Model
         'type',
         'user_id',
         'status',
+        'reg_num',
+        'reg_date',
+    ];
+
+    protected $casts = [
+        'reg_date' => 'date',
     ];
 
     public function user()
