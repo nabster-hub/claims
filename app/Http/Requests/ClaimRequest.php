@@ -36,7 +36,7 @@ class ClaimRequest extends FormRequest
                 'claim' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
                 'questionnaire' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
                 'cal_power' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
-                'CTD' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:40960',
+                'CTD' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:102400',
                 'type' => 'required|integer',
             ];
             $rules['pc'] = 'nullable|string';
@@ -47,7 +47,7 @@ class ClaimRequest extends FormRequest
                 'claim' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
                 'questionnaire' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
                 'cal_power' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
-                'CTD' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:40960',
+                'CTD' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:102400',
                 'tech_offer' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
                 'OCD' => 'required|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
                 'type' => 'nullable|integer',
@@ -58,7 +58,7 @@ class ClaimRequest extends FormRequest
                 'claim' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
                 'questionnaire' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
                 'cal_power' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
-                'CTD' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:40960',
+                'CTD' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:102400',
                 'tech_offer' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
                 'OCD' => 'nullable|mimes:jpeg,png,jpg,gif,svg,pdf,doc,docx|max:10240',
                 'type' => 'nullable|integer',
@@ -90,7 +90,7 @@ class ClaimRequest extends FormRequest
             'cal_power.max' => 'Файл Расчёт заявленной мощности не должен привышать 10 МБ.',
             'CTD.required' => 'Копии правоустанавливающих документов - является обязательным для заполнения',
             'CTD.mimes' => 'Файл Копии правоустанавливающих документов должен быть в формате jpeg, png, jpg, gif, svg, pdf, doc, docx',
-            'CTD.max' => 'Файл Копии правоустанавливающих документов не должен привышать 10 МБ.',
+            'CTD.max' => 'Файл Копии правоустанавливающих документов не должен привышать 100 МБ.',
         ];
     }
 }
