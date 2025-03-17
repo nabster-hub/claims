@@ -79,6 +79,11 @@ class Claim extends Model
         return $this->hasOne(User::class, 'last_edit_user');
     }
 
+    public function connect()
+    {
+        return $this->hasOne(Connect::class, 'id', 'connect_id');
+    }
+
     public function scopeByRegion($query, $region_id, $user_id)
     {
         if ($region_id !== 12) {

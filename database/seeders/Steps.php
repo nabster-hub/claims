@@ -25,5 +25,8 @@ class Steps extends Seeder
         Step::create([
             'name'=>'Завершён'
         ]);
+        Step::create([
+            'name'=>'Завершён и подключён'
+        ]);
     }
 }

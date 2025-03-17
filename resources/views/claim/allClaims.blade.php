@@ -134,6 +134,9 @@
                                     @elseif(Auth::user()->id === $claim->user_id && $claim->status === 1)
                                         <a href="{{route('claim.stepOne', $claim->id)}}" class="bg-red-800 p-2 border border-gray-700 rounded-lg text-white
                                        hover:bg-red-600 text-center transition-all flex justify-center">Доработать</a>
+                                    @elseif(Auth::user()->id === $claim->user_id && $claim->status === 4)
+                                        <a href="{{route('connect.show', $claim->id)}}" class="bg-yellow-800 p-2 border border-gray-700 rounded-lg text-white
+                                       hover:bg-yellow-600 text-center transition-all flex justify-center">Добавить лицевой</a>
                                     @endif
                                 </td>
                                 <td class="px-1 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
