@@ -81,7 +81,7 @@ class Claim extends Model
 
     public function connect()
     {
-        return $this->hasOne(Connect::class, 'id', 'connect_id');
+        return $this->hasOne(Connect::class, 'claim_id', 'id');
     }
 
     public function scopeByRegion($query, $region_id, $user_id)

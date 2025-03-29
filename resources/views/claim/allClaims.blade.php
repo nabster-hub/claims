@@ -78,6 +78,7 @@
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Район</th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Статус</th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Дней в работе</th>
+                            <th class="px-6 py-3 border-b border-gray-200 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Подключён</th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-100 min-w-[10%]"></th>
                             <th class="px-6 py-3 border-b border-gray-200 bg-gray-100 min-w-[10%]"></th>
                         </tr>
@@ -126,6 +127,13 @@
                             @elseif($claim->getWorkingDays() > 5 && $claim->status !== 4) bg-red-100 text-red-800 @endif">
                                     {{ $claim->getWorkingDays() }}
                                 </td>
+                                <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+                                    @if($claim->connect)
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 text-center p-2">Да</span>
+                                    @else
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 text-center p-2">Нет</span>
+                                    @endif
+                                </td>
                                 <td class="px-1 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
                                     @if((Auth::user()->region_id===12 && $claim->status === 3 && $claim->type != 1) || (Auth::user()->id === $claim->user_id && $claim->status === 3 && $claim->type === 1))
                                         <a href="{{route('claim.stepThree', $claim->id)}}"
@@ -134,7 +142,7 @@
                                     @elseif(Auth::user()->id === $claim->user_id && $claim->status === 1)
                                         <a href="{{route('claim.stepOne', $claim->id)}}" class="bg-red-800 p-2 border border-gray-700 rounded-lg text-white
                                        hover:bg-red-600 text-center transition-all flex justify-center">Доработать</a>
-                                    @elseif(Auth::user()->id === $claim->user_id && $claim->status === 4)
+                                    @elseif(Auth::user()->id === $claim->user_id && $claim->status === 4 && !$claim->connect)
                                         <a href="{{route('connect.show', $claim->id)}}" class="bg-yellow-800 p-2 border border-gray-700 rounded-lg text-white
                                        hover:bg-yellow-600 text-center transition-all flex justify-center">Добавить лицевой</a>
                                     @endif

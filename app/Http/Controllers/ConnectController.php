@@ -27,11 +27,19 @@ class ConnectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(int $claim, Request $request)
     {
+        //dd($request);
         $request->validate([
-            'clinetNo' => 'required|string',
+            'clientNo' => 'required|numeric|min_digits:6|max_digits:15',
         ]);
+
+        Connect::create([
+            'claim_id' => $claim,
+            'client' => $request->input('clientNo'),
+        ]);
+
+        return redirect()->route('connect.show', ['claim' => $claim]);
     }
 
     /**

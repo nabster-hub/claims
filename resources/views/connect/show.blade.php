@@ -7,14 +7,30 @@
             <div class="p-6 bg-white rounded-md shadow-md">
                 <h2 class="text-lg text-gray-700 font-semibold capitalize">Данные заявление</h2>
                 <div class="grid grid-cols-1 gap-6 mt-4">
+
+                    @if ($errors->any())
+                        <div class="bg-red-500 text-white w-1/2 p-4 border-md border-gray-800 rounded-xl">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div>
+                        @if(!$claim->connect)
                         <div class="mb-4"><input type="checkbox" id="lics" /> <span class="mb-4">Подключился</span></div>
 
-                        <form action="{{route('connect.store', $claim->id)}}" id="form" class="hidden">
-                        @csrf
+                        <form action="{{route('connect.store', $claim->id)}}" method="POST" id="form" class="hidden">
+                            @csrf
+                            @method('POST')
                             <input name="clientNo" type="text" placeholder="Введите лицевой номер" class=" mt-2 py-2 border-gray-700 border-b border-t focus:border-indigo-600" />
                             <button type="submit" class="px-6 py-3 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Сохранить</button>
                         </form>
+                        @else
+                        <div class="mb-4">Подключён Номер Клиента - <span class="bg-green-600">{{$claim->connect->client}}</span> </div>
+                        @endif
                     </div>
                     <div>
                         <label class="text-gray-700">Дней в работе</label>
