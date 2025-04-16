@@ -55,3 +55,4 @@ Route::middleware('auth')->prefix('reports')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+require __DIR__.'/report.php';

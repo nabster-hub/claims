@@ -33,7 +33,7 @@
                             <div class="form-input w-full mt-2 rounded-md focus:border-indigo-600">{{$claim->full_name}}</div>
                         </div>
                         <div>
-                            <label class="text-gray-700" for="address">Адрес и моего расположения объекта</label>
+                            <label class="text-gray-700" for="address">Адрес и место расположения объекта</label>
                             <div class="form-input w-full mt-2 rounded-md focus:border-indigo-600">{{$claim->address}}</div>
                         </div>
 

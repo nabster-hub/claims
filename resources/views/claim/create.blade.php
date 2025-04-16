@@ -34,7 +34,7 @@
                             <input name="full_name" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('full_name')}}">
                         </div>
                         <div>
-                            <label class="text-gray-700" for="address">Адрес и моего расположения объекта</label>
+                            <label class="text-gray-700" for="address">Адрес и место расположения объекта</label>
                             <input name="address" class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="text" value="{{old('address')}}">
                         </div>
 
