@@ -35,7 +35,19 @@
                      <div class="relative">
                          <input placeholder="Дней в работе" type="number" name="day" class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-2 pr-2 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" value="{{ request('day') }}" />
                      </div>
+                     <div class="relative">
+                         <select name="type" class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">
+                             <option value="" @if(!request('type')) selected @endif>Все заявления</option>
+                             <option value="1" @if(request('type') == 1) selected @endif>Физ. лица</option>
+                             <option value="2" @if(request('type') == 2) selected @endif>Юр. лица</option>
+                         </select>
 
+                         <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                 <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                             </svg>
+                         </div>
+                    </div>
 {{--                     <div class="relative">--}}
 {{--                         <select class="appearance-none h-full rounded-r border-t sm:rounded-r-none sm:border-r-0 border-r border-b block appearance-none w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:border-l focus:border-r focus:bg-white focus:border-gray-500">--}}
 {{--                             <option>All</option>--}}

@@ -44,7 +44,6 @@ class ClaimController extends Controller
         $regions = Region::all();
 
 
-
         if($request->filled('region')){
             $region = (int) $request->input('region');
             $query->whereHas('user', function ($query) use ($region) {
@@ -78,7 +77,9 @@ class ClaimController extends Controller
             });
         }
 
-
+        if($request->filled('type')){
+            $query->where('type', $request->input('type'));
+        }
 
         if($request->filled('day')){
             $claims = new \Illuminate\Pagination\LengthAwarePaginator(
@@ -94,6 +95,7 @@ class ClaimController extends Controller
         }else{
             $claims = $query->orderBy('updated_at', 'desc')->paginate(10)->appends(request()->query());
         }
+
 
 
 
