@@ -28,6 +28,13 @@
                         <label class="text-gray-700" for="eday">До</label>
                         <input name="eday" required class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="date" value="{{old('eday')}}">
                     </div>
+                    @if(Auth::user()->region_id != 12)
+                        <div>
+                            <label class="text-gray-700" for="type">По району</label>
+                            <input type="hidden" name="region" value="{{Auth::user()->region_id}}">
+                            <span class="block form-input w-full mt-2 rounded-md focus:border-indigo-600">{{$regions->firstWhere('id', Auth::user()->region_id)->name}}</span>
+                        </div>
+                    @else
                     <div>
                         <label class="text-gray-700" for="type">По районам</label>
                         <select name="region" class="form-input w-full mt-2 rounded-md focus:border-indigo-600">
@@ -39,6 +46,7 @@
                             @endforeach
                         </select>
                     </div>
+                    @endif
                     <div>
                         <label for=type" class="text-gray-700">По типу заявителя</label>
                         <select name="type" class="form-input w-full mt-2 rounded-md focus:border-indigo-600">

@@ -8,6 +8,7 @@ use App\Models\Claim;
 use App\Models\Region;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class SummaryReportController extends Controller
@@ -25,32 +26,6 @@ class SummaryReportController extends Controller
     {
         $validated = $request->validated();
         $claims = $this->getData($validated);
-//        if($validated['step']){
-//            if($validated['step'] == 1){
-//                $query = Claim::whereBetween('reg_date', [$validated['sday'], $validated['eday']])->where('status', '>=', 4);
-//            }elseif($validated['step'] == 2){
-//                $query = Claim::whereBetween('created_at', [Carbon::parse($validated['sday'])->startOfDay(), Carbon::parse($validated['eday'])->endOfDay()])->where('status', '<', 4);
-//            }
-//        }else{
-//            $query = Claim::whereBetween('created_at', [Carbon::parse($validated['sday'])->startOfDay(), Carbon::parse($validated['eday'])->endOfDay()]);
-//        }
-//
-//        if($validated['type']){
-//            $query->where('type', $validated['type']);
-//        }
-//
-//        if($validated['power']){
-//            $query->where('power', '>=' ,$validated['power']);
-//        }
-//
-//        if($validated['region']){
-//            $query->whereHas('user', function($q) use($validated){
-//                $q->where('region_id', $validated['region']);
-//            });
-//        }
-//
-//
-//        $claims = $query->get();
 
         $powers = $claims->sum('power');
 
@@ -69,6 +44,7 @@ class SummaryReportController extends Controller
 
     private function getData($validated = [])
     {
+        $user_id = Auth::user()->id;
         if($validated['step']){
             if($validated['step'] == 1){
                 $query = Claim::whereBetween('reg_date', [$validated['sday'], $validated['eday']])->where('status', '>=', 4);
@@ -79,6 +55,7 @@ class SummaryReportController extends Controller
             $query = Claim::whereBetween('created_at', [Carbon::parse($validated['sday'])->startOfDay(), Carbon::parse($validated['eday'])->endOfDay()]);
         }
 
+
         if($validated['type']){
             $query->where('type', $validated['type']);
         }
@@ -87,10 +64,12 @@ class SummaryReportController extends Controller
             $query->where('power', '>=' ,$validated['power']);
         }
 
-        if($validated['region']){
+        if($validated['region'] && Auth::user()->region_id == 12){
             $query->whereHas('user', function($q) use($validated){
                 $q->where('region_id', $validated['region']);
             });
+        }else{
+            $query->where('user_id', $user_id);
         }
 
 
