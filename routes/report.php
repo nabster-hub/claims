@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\ReportController;
-use App\Http\Controllers\SummaryReportController;
+use App\Http\Controllers\Reports\SummaryReportController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('report')->middleware('auth')->group(function () {

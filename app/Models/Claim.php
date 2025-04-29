@@ -56,10 +56,14 @@ class Claim extends Model
     {
         $start = Carbon::parse($this->created_at);
 
-        if($this->status != 4)
+        if($this->status < 4)
             $end = Carbon::now();
+        elseif($this->status == 4)
+            $end = Carbon::parse($this->updated_at)->endOfDay();
+        elseif($this->reg_date)
+            $end = Carbon::parse($this->reg_date)->endOfDay();
         else
-            $end = Carbon::parse($this->updated_at);
+            $end = Carbon::parse($this->updated_at)->endOfDay();
 
         $period = CarbonPeriod::create($start, $end);
 

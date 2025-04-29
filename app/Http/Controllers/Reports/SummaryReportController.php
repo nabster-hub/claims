@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Reports;
 
 use App\Exports\ClaimsExport;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\SummaryRequest;
 use App\Models\Claim;
 use App\Models\Region;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -47,12 +47,12 @@ class SummaryReportController extends Controller
         $user_id = Auth::user()->id;
         if($validated['step']){
             if($validated['step'] == 1){
-                $query = Claim::whereBetween('reg_date', [$validated['sday'], $validated['eday']])->where('status', '>=', 4);
+                $query = Claim::whereBetween('reg_date', [$validated['sday'], $validated['eday']])->where('status', '>=', 4)->andWhere('status', '!=', 6);
             }elseif($validated['step'] == 2){
                 $query = Claim::whereBetween('created_at', [Carbon::parse($validated['sday'])->startOfDay(), Carbon::parse($validated['eday'])->endOfDay()])->where('status', '<', 4);
             }
         }else{
-            $query = Claim::whereBetween('created_at', [Carbon::parse($validated['sday'])->startOfDay(), Carbon::parse($validated['eday'])->endOfDay()]);
+            $query = Claim::whereBetween('created_at', [Carbon::parse($validated['sday'])->startOfDay(), Carbon::parse($validated['eday'])->endOfDay()])->where('status', '!=', 6);
         }
 
 
@@ -74,6 +74,5 @@ class SummaryReportController extends Controller
 
 
         return $query->get();
-
     }
 }

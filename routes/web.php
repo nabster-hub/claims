@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AnnulationController;
 use App\Http\Controllers\ConnectController;
 use App\Http\Controllers\ProfileController;
-use \App\Http\Controllers\ClaimController;
+use App\Http\Controllers\ClaimController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -31,6 +32,8 @@ Route::middleware('auth')->group(function () {
    Route::put('/claim/step-two/{claim}', [ClaimController::class, 'stepTwoUpdate'])->name('claim.stepTwoUpdate');
    Route::get('/claim/step-three/{claim}', [ClaimController::class, 'stepThree'])->name('claim.stepThree');
    Route::put('/claim/step-three/{claim}', [ClaimController::class, 'stepThreeUpdate'])->name('claim.stepThreeUpdate');
+   Route::get('/claim/annulation/{claim}', [AnnulationController::class, 'show'])->name('claim.annulation');
+   Route::post('/claim/annulation', [AnnulationController::class, 'update'])->name('claim.annulated');
    Route::get('/claim/{claim}', [ClaimController::class, 'show'])->name('claim.show');
    Route::delete('/claim/{claim}', [ClaimController::class, 'destroy'])->name('claim.destroy');
    Route::put('/claim/{claim}', [ClaimController::class, 'update'])->name('claim.update');

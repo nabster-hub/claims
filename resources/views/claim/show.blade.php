@@ -103,6 +103,17 @@
                                     <svg height="32" viewBox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><path d="m0 0h32v32h-32z"/><path d="m9.88528137 7.48578644 1.41421353 1.41421356-6.0994949 6.0997864 25.4426407.0002136v2l-25.4286407-.0002136 6.0854949 6.085495-1.41421353 1.4142135-8.48528137-8.4852813.022-.0214272-.022-.0217186z" fill="#fff" transform="matrix(-1 0 0 -1 32.04264 31.985282)"/></g></svg>
                             </a>
                         @endif
+
+                        @if($claim->status >= 3 && $claim->status < 6 &&
+                            (
+                                (Auth::user()->region_id == 12 && $claim->type == 2) ||
+                                ($claim->type == 1 && Auth::user()->id == $claim->user_id)
+                            )
+                        )
+                            <a href="{{route('claim.annulation', $claim->id)}}" class="px-4 py-2 bg-red-800 text-white rounded-md hover:bg-red-700 focus:outline-none focus:bg-red-700 flex items-center gap-4">
+                                <span>Аннулировать</span>
+                            </a>
+                        @endif
                     </div>
             </div>
         </div>
