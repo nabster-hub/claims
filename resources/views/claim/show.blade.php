@@ -12,6 +12,20 @@
                             <label class="text-gray-700">Дней в работе</label>
                             <div class="w-full mt-2 py-2  border-gray-700 border-b border-t focus:border-indigo-600">{{$claim->getWorkingDays()}}</div>
                         </div>
+                        <div>
+                            <label class="text-gray-700" for="status">Статус</label>
+                            <div class="w-full mt-2 py-2  border-gray-700 border-b border-t focus:border-indigo-600">
+                                {{$claim->step->name}}
+                            </div>
+                        </div>
+                        @if($claim->status == 6)
+                            <div>
+                                <label class="text-gray-700" for="status">Причина аннулирования</label>
+                                <div class="w-full mt-2 py-2  border-gray-700 border-b border-t focus:border-indigo-600">
+                                    {{$claim->comments->last()->content ?? "Комментарий не найден"}}
+                                </div>
+                            </div>
+                        @endif
                         @if($claim->reg_num)
                             <div>
                                 <label class="text-gray-700" for="reg_num">Номер технического условия</label>
