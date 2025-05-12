@@ -68,7 +68,7 @@ class SummaryReportController extends Controller
             $query->whereHas('user', function($q) use($validated){
                 $q->where('region_id', $validated['region']);
             });
-        }else{
+        }elseif(Auth::user()->region_id != 12){
             $query->where('user_id', $user_id);
         }
 
