@@ -47,7 +47,7 @@ class SummaryReportController extends Controller
         $user_id = Auth::user()->id;
         if($validated['step']){
             if($validated['step'] == 1){
-                $query = Claim::whereBetween('reg_date', [$validated['sday'], $validated['eday']])->where('status', '>=', 4)->andWhere('status', '!=', 6);
+                $query = Claim::whereBetween('reg_date', [$validated['sday'], $validated['eday']])->where('status', '>=', 4)->where('status', '!=', 6);
             }elseif($validated['step'] == 2){
                 $query = Claim::whereBetween('created_at', [Carbon::parse($validated['sday'])->startOfDay(), Carbon::parse($validated['eday'])->endOfDay()])->where('status', '<', 4);
             }
