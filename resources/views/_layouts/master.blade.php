@@ -9,7 +9,8 @@
 
 {{--        <meta name="description" content="{{ $page->description }}">--}}
 
-{{--        <title>{{ $page->title }}</title>--}}
+        <title>{{ config('app.name', 'Laravel') }}</title>
+        <link rel="icon" type="image/svg" href="/storage/img/favicon.svg">
         @vite('resources/css/app.css')
         @vite('resources/js/app.js')
 {{--        <link rel="stylesheet" href="{{ mix('css/main.css', 'assets/build') }}">--}}

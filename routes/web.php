@@ -35,6 +35,8 @@ Route::middleware('auth')->group(function () {
    Route::get('/claim/annulation/{claim}', [AnnulationController::class, 'show'])->name('claim.annulation');
    Route::post('/claim/annulation', [AnnulationController::class, 'update'])->name('claim.annulated');
    Route::get('/claim/{claim}', [ClaimController::class, 'show'])->name('claim.show');
+   Route::get('/claim/{claim}/tech', [ClaimController::class, 'edit'])->name('claim.tech');
+   Route::put('/claim/{claim}/tech', [ClaimController::class, 'updateTech'])->name('claim.updateTech');
    Route::delete('/claim/{claim}', [ClaimController::class, 'destroy'])->name('claim.destroy');
    Route::put('/claim/{claim}', [ClaimController::class, 'update'])->name('claim.update');
 

@@ -334,8 +334,36 @@ class ClaimController extends Controller
         return redirect()->route('dashboard')->with(['success' => "Заявка #$claim->id исправлена и отправлена на согласования"]);
 
     }
-    public function destroy(Claim $claim)
+    public function edit(Claim $claim)
     {
+        return view('claim.edit', compact('claim'));
+    }
 
+    public function updateTech(Claim $claim, DocsRequest $request)
+    {
+        $this->authorize('updateTech', $claim);
+        $FileUpload = new FileController();
+
+        $validated = $request->validated();
+
+        $files = array();
+
+        try {
+            foreach ($request->allFiles() as $key => $file) {
+                $files[$key] = $FileUpload->loadMore($request->file($key), (string) $claim->docs->claim);
+                $FileUpload->destroy($claim->docs->$key);
+                $claim->docs()->update([$key => $files[$key]]);
+            }
+
+            $claim->updateQuietly([
+                'reg_num' => $validated['reg_num'],
+                'reg_date' => $validated['reg_date'],
+            ]);
+
+        }catch (\Exception $exception){
+            return redirect()->back()->withErrors(['error' => $exception->getMessage()]);
+        }
+
+        return redirect()->route('dashboard')->with(['success' => "Заявка #$claim->id тех условие заменено"]);
     }
 }

@@ -55,6 +55,14 @@ class ClaimPolicy
         return false;
     }
 
+    public function updateTech(User $user, Claim $claim): bool
+    {
+        if($user->region_id == 12){
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Determine whether the user can delete the model.
      */
