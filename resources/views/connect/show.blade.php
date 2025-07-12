@@ -22,10 +22,26 @@
                         @if(!$claim->connect)
                         <div class="mb-4"><input type="checkbox" id="lics" /> <span class="mb-4">Подключился</span></div>
 
-                        <form action="{{route('connect.store', $claim->id)}}" method="POST" id="form" class="hidden">
+                        <form action="{{route('connect.store', $claim->id)}}" method="POST" id="form" class="hidden flex flex-col gap-4">
                             @csrf
                             @method('POST')
-                            <input name="clientNo" type="text" placeholder="Введите лицевой номер" class=" mt-2 py-2 border-gray-700 border-b border-t focus:border-indigo-600" />
+                            <label class="text-gray-700" for="clientNo">Лицевой счёт</label>
+                            <input name="clientNo" type="text" placeholder="Введите лицевой счёт" class=" mt-2 py-2 border-gray-700 border-b border-t focus:border-indigo-600" />
+                            @if($claim->type === 2)
+                             <label class="text-gray-700" for="act_date">Дата выдачи акта</label>
+                             <input name="act_date" type="date" placeholder="Выберите дату выдачи акта"/>
+                             <label class="text-gray-700" for="act_number">Номер акта</label>
+                             <input name="act_number" type="number" placeholder="Введите номер акта"/>
+                             <label class="text-gray-700" for="receipt_number">Номер квитанции оплаты</label>
+                             <input name="receipt_number" type="number" placeholder="Введите номер квитанции оплаты"/>
+                             <label class="text-gray-700" for="receipt_sum">Сумма оплаты по квитанции</label>
+                             <input name="receipt_sum" type="number" placeholder="Введите сумму оплаты"/>
+                             <label class="text-gray-700" for="SMR">СМР проектной организации</label>
+                             <input name="SMR" type="text" placeholder="Введите СМР проектной организации"/>
+                             <label class="text-gray-700" for="distance_solder">Растояние в метрах до места пайки</label>
+                             <input name="distance_solder" type="number" placeholder="Введите растояние в метрах до места пайки"/>
+
+                            @endif
                             <button type="submit" class="px-6 py-3 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Сохранить</button>
                         </form>
                         @else

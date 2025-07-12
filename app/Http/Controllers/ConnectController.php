@@ -27,19 +27,37 @@ class ConnectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(int $claim, Request $request)
+    public function store(Claim $claim, Request $request)
     {
-        //dd($request);
-        $request->validate([
-            'clientNo' => 'required|numeric|min_digits:6|max_digits:15',
-        ]);
+        if($claim->type == 2){
+            $request->validate([
+                'clientNo' => 'required|numeric|min_digits:6|max_digits:15',
+                'act_date' => 'required|date',
+                'act_number' => 'required|numeric|max_digits:15',
+                'receipt_number' => 'required|numeric|max_digits:15',
+                'receipt_sum' => 'required|numeric|max_digits:15',
+                'SMR' => 'required',
+                'distance_solder' => 'required|numeric|max_digits:15',
+            ]);
+        }else{
+            $request->validate([
+               'clientNo' => 'required|numeric|min_digits:6|max_digits:15',
+            ]);
+        }
+
 
         Connect::create([
-            'claim_id' => $claim,
+            'claim_id' => $claim->id,
             'client' => $request->input('clientNo'),
+            'date_act' => $request->input('act_date'),
+            'act_number' => $request->input('act_number'),
+            'receipt_number' => $request->input('receipt_number'),
+            'receipt_sum' => $request->input('receipt_sum'),
+            'SMR' => $request->input('SMR'),
+            'distance_solder' => $request->input('distance_solder'),
         ]);
 
-        return redirect()->route('connect.show', ['claim' => $claim]);
+        return redirect()->route('connect.show', ['claim' => $claim->id]);
     }
 
     /**

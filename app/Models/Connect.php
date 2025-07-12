@@ -8,6 +8,12 @@ class Connect extends Model
 {
     protected $fillable = [
         'claim_id',
-        'client'
+        'client',
+        'date_act',
+        'act_number',
+        'receipt_number',
+        'receipt_sum',
+        'distance_solder',
+        'SMR'
     ];
 }
