@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigInteger('receipt_number')->nullable();
             $table->bigInteger('receipt_sum')->nullable();
             $table->string('SMR')->nullable();
-            $table->integer('distance_solder')->unsigned();
+            $table->integer('distance_solder')->unsigned()->nullable();
         });
     }
 

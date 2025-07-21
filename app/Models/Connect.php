@@ -9,7 +9,7 @@ class Connect extends Model
     protected $fillable = [
         'claim_id',
         'client',
-        'date_act',
+        'act_date',
         'act_number',
         'receipt_number',
         'receipt_sum',
