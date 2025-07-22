@@ -56,10 +56,19 @@
 
                         </select>
                     </div>
+                    <span class="block text-xl font-medium text-gray-700 mb-4 border-b border-gray-700">По мощности</span>
                     <div>
-                        <label for="power" class="text-gray-700">По мощности более</label>
-                        <input name="power" type="number" value="0" class="form-input w-full mt-2 rounded-md focus:border-indigo-600"/>
+                        <label class="text-gray-700" for="powerMin">С</label>
+                        <input name="powerMin" required class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="number" value="{{old('powerMin')}}">
                     </div>
+                    <div class="border-b pb-4 border-gray-700">
+                        <label class="text-gray-700" for="powerMax">До</label>
+                        <input name="powerMax" required class="form-input w-full mt-2 rounded-md focus:border-indigo-600" type="number" value="{{old('powerMax')}}">
+                    </div>
+{{--                    <div>--}}
+{{--                        <label for="power" class="text-gray-700">По мощности более</label>--}}
+{{--                        <input name="power" type="number" value="0" class="form-input w-full mt-2 rounded-md focus:border-indigo-600"/>--}}
+{{--                    </div>--}}
                     <div>
                         <label for="step" class="text-gray-700">По статусу</label>
                         <select name="step" class="form-input w-full mt-2 rounded-md focus:border-indigo-600">

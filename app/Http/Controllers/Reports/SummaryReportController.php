@@ -60,8 +60,8 @@ class SummaryReportController extends Controller
             $query->where('type', $validated['type']);
         }
 
-        if($validated['power']){
-            $query->where('power', '>=' ,$validated['power']);
+        if($validated['powerMin'] && $validated['powerMax']){
+            $query->whereBetween('power', [$validated['powerMin'], $validated['powerMax']]);
         }
 
         if($validated['region'] && Auth::user()->region_id == 12){

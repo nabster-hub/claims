@@ -26,7 +26,8 @@ class SummaryRequest extends FormRequest
             'eday' => 'required|date',
             'region' => 'nullable|numeric|exists:regions,id',
             'type' => 'numeric',
-            'power' => 'nullable|numeric',
+            'powerMin' => 'nullable|numeric',
+            'powerMax' => 'nullable|numeric',
             'step' => 'numeric',
         ];
     }
@@ -41,7 +42,8 @@ class SummaryRequest extends FormRequest
             'region.numeric' => "Район не правильно заполнен",
             'region.exists' => "Район не найден",
             'type.numeric' => "По типу заявителя не правильно заполнена",
-            'power.numeric' => 'По мощности должно быть целое число',
+            'powerMax.numeric' => 'По мощности ДО должно быть целое число',
+            'powerMin.numeric' => 'По мощности C должно быть целое число',
             'step.numeric' => 'По статусу не правильно заполнена',
         ];
     }
