@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\Reports\DoneSummaryController;
 use App\Http\Controllers\Reports\SummaryReportController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,5 +19,10 @@ Route::prefix('report')->middleware('auth')->group(function () {
     Route::post('/summary', [SummaryReportController::class, 'report'])->name('report.creatSummary');
     Route::post('/summary/export', [SummaryReportController::class, 'export'])->name('report.summaryExport');
 
-
+    /**
+     * Оконченный отчёт
+     */
+    Route::get('/doneSummary', [DoneSummaryController::class, 'index'])->name('report.doneSummary');
+    Route::post('/doneSummary', [DoneSummaryController::class, 'report'])->name('report.createDoneSummary');
+    Route::post('/doneSummary/export', [DoneSummaryController::class, 'export'])->name('report.DoneSummaryExport');
 });

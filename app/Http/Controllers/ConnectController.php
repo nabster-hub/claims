@@ -45,11 +45,10 @@ class ConnectController extends Controller
             ]);
         }
 
-
         Connect::create([
             'claim_id' => $claim->id,
             'client' => $request->input('clientNo'),
-            'date_act' => $request->input('act_date'),
+            'act_date' => $request->input('act_date'),
             'act_number' => $request->input('act_number'),
             'receipt_number' => $request->input('receipt_number'),
             'receipt_sum' => $request->input('receipt_sum'),
@@ -57,6 +56,7 @@ class ConnectController extends Controller
             'distance_solder' => $request->input('distance_solder'),
         ]);
 
+        $claim->update(['status' => 5]);
         return redirect()->route('connect.show', ['claim' => $claim->id]);
     }
 

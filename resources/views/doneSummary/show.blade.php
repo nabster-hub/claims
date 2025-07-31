@@ -14,12 +14,11 @@
                 <td class="border border-solid border-black font-semibold text-center">Телефон Контакты</td>
                 <td class="border border-solid border-black font-semibold text-center">Мощность кВт</td>
                 <td class="border border-solid border-black font-semibold text-center">Точка подключения</td>
-                <td class="border border-solid border-black font-semibold text-center">Л/С</td>
+                <td class="border border-solid border-black font-semibold text-center">Дата внесения</td>
                 <td class="border border-solid border-black font-semibold text-center">Дата и номер АКТа разграничения</td>
-                <td class="border border-solid border-black font-semibold text-center">Номер квитанции оплаты</td>
-                <td class="border border-solid border-black font-semibold text-center">Сумма оплаты</td>
+                <td class="border border-solid border-black font-semibold text-center">Номер квитанции и сумма</td>
                 <td class="border border-solid border-black font-semibold text-center">СМР проектной организации</td>
-                <td class="border border-solid border-black font-semibold text-center">Растояние до пайки</td>
+                <td class="border border-solid border-black font-semibold text-center">Растояние до пайки м</td>
             </tr>
             </thead>
             <tbody>
@@ -46,20 +45,48 @@
                             Нету данных
                         @endif
                     </td>
+                    <td class="border border-solid border-black pl-1">
+                        @if($claim->connect->created_at)
+                        {{\Carbon\Carbon::parse($claim->connect->created_at)->format('d.m.Y')}}
+                        @endif
+                    </td>
+                    <td class="border border-solid border-black pl-1">
+                        @if($claim->connect->act_date)
+                            {{\Carbon\Carbon::parse($claim->connect->act_date)->format('d.m.Y')}}
+                        @endif
+                        @if($claim->connect->act_number)
+                           {{" ".$claim->connect->act_number}}
+                        @endif
+                    </td>
+                    <td class="border border-solid border-black pl-1">
+                        @if($claim->connect->receipt_number && $claim->connect->receipt_sum)
+                            {{$claim->connect->receipt_number." ".$claim->connect->receipt_sum}}
+                        @endif
+                    </td>
+                    <td class="border border-solid border-black pl-1">
+                        @if($claim->connect->SMR)
+                            {{$claim->connect->SMR}}
+                        @endif
+                    </td>
+                    <td class="border border-solid border-black pl-1">
+                        @if($claim->connect->distance_solder)
+                            {{$claim->connect->distance_solder." м."}}
+                        @endif
+                    </td>
                 </tr>
             @php $i++; @endphp
             @endforeach
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="6" class="pl-1 pr-2 text-right font-semibold">Итого:</td>
+                    <td colspan="12" class="pl-1 pr-2 text-right font-semibold">Итого:</td>
                     <td colspan="2" class="pl-1 font-semibold">{{round($powers, 1)}} кВт</td>
                 </tr>
             </tfoot>
         </table>
 
         <div class="mt-6">
-            <form action="{{route('report.summaryExport')}}" method="POST">
+            <form action="{{route('report.DoneSummaryExport')}}" method="POST">
                 @csrf
                 @foreach($validated as $key=>$value)
                     <input type="hidden" name="{{$key}}"  value="{{$value}}">
