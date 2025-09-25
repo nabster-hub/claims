@@ -31,7 +31,7 @@ class ConnectController extends Controller
     {
         if($claim->type == 2){
             $request->validate([
-                'clientNo' => 'required|numeric|min_digits:6|max_digits:15',
+                'clientNo' => 'required|numeric|min_digits:5|max_digits:15',
                 'act_date' => 'required|date',
                 'act_number' => 'required|numeric|max_digits:15',
                 'receipt_number' => 'required|numeric|max_digits:15',
