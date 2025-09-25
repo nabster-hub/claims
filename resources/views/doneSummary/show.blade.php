@@ -55,12 +55,14 @@
                             {{\Carbon\Carbon::parse($claim->connect->act_date)->format('d.m.Y')}}
                         @endif
                         @if($claim->connect->act_number)
-                           {{" ".$claim->connect->act_number}}
+                           {{" №".$claim->connect->act_number}}
                         @endif
                     </td>
                     <td class="border border-solid border-black pl-1">
                         @if($claim->connect->receipt_number && $claim->connect->receipt_sum)
-                            {{$claim->connect->receipt_number." ".$claim->connect->receipt_sum}}
+                            {{"№".$claim->connect->receipt_number}}
+                            <br>
+                            {{$claim->connect->receipt_sum."тг."}}
                         @endif
                     </td>
                     <td class="border border-solid border-black pl-1">

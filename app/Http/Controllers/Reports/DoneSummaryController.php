@@ -44,7 +44,7 @@ class DoneSummaryController extends Controller
     {
         $user_id = Auth::user()->id;
         if($validated['step']){
-            $query = Claim::whereBetween('reg_date', [$validated['sday'], $validated['eday']])->where('status', 5);
+            $query = Claim::whereBetween('updated_at', [$validated['sday'], $validated['eday']])->where('status', 5);
         }else{
             $query = Claim::whereBetween('created_at', [Carbon::parse($validated['sday'])->startOfDay(), Carbon::parse($validated['eday'])->endOfDay()])->where('status', '!=', 6);
         }
