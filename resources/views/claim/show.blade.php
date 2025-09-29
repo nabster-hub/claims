@@ -108,7 +108,7 @@
 
                     <div class="flex justify-end mt-4 gap-4">
                         @if($claim->status === 1 && Auth::user()->id === $claim->user_id)
-                            <button class="px-4 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700">Изменить</button>
+                            <a href="{{route('claim.stepOne', $claim->id)}}" class="px-4 py-2 bg-gray-800 text-gray-200 rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700">Изменить</a>
                         @endif
 
                         @if($claim->status == 2 && Auth::user()->id === $claim->user_id)
