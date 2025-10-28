@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Reports;
 
 use App\Exports\ClaimsExport;
+use App\Exports\DoneSummaryExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SummaryRequest;
 use App\Models\Claim;
@@ -37,7 +38,7 @@ class DoneSummaryController extends Controller
         $claims = $this->getData($validated);
         $powers = $claims->sum('power');
 
-        return Excel::download(new ClaimsExport($claims, $powers, $validated), 'claims_done.xlsx');
+        return Excel::download(new DoneSummaryExport($claims, $powers, $validated), 'claims_done.xlsx');
     }
 
     private function getData($validated = [])

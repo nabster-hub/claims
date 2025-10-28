@@ -1,8 +1,8 @@
 <h3 class="text-center font-medium text-2xl mb-4">С {{\Carbon\Carbon::parse($validated['sday'])->format('d.m.Y')}} ПО {{\Carbon\Carbon::parse($validated['eday'])->format('d.m.Y')}}</h3>
-<table class="border-2 border-solid border-black">
+<table border="" class="border-2 border-solid border-black">
     <thead class="border border-solid border-black">
     <tr>
-        <td class="border border-solid border-black font-semibold text-center">№</td>
+        <td  class="border border-solid border-black font-semibold text-center">№</td>
         <td class="border border-solid border-black font-semibold text-center">ФИО Наименование организации</td>
         <td class="border border-solid border-black font-semibold text-center">Адрес объекта</td>
         <td class="border border-solid border-black font-semibold text-center">Дата выдачи тех. условия</td>
