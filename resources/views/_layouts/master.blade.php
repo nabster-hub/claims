@@ -5,17 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="referrer" content="always">
-{{--        <link rel="canonical" href="{{ $page->getUrl() }}">--}}
-
-{{--        <meta name="description" content="{{ $page->description }}">--}}
-
         <title>{{ config('app.name', 'Laravel') }}</title>
         <link rel="icon" type="image/svg" href="/storage/img/favicon.svg">
         @vite('resources/css/app.css')
         @vite('resources/js/app.js')
-{{--        <link rel="stylesheet" href="{{ mix('css/main.css', 'assets/build') }}">--}}
-
-{{--        <script src="{{ mix('js/main.js', 'assets/build') }}"></script>--}}
     </head>
     <body>
         <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200 font-roboto">

@@ -8,9 +8,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $num  = "1.000";
-        dd($num);
-        return view('admin.index');
+        return view('test');
     }
 
     public function create()
