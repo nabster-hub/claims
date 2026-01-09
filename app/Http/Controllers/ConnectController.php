@@ -4,10 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Claim;
 use App\Models\Connect;
+use App\Services\FileStorage;
 use Illuminate\Http\Request;
 
 class ConnectController extends Controller
 {
+    private FileStorage $storage;
+    private int $user_id;
+    private int $region_id;
+
+    public function __construct(FileStorage $storage)
+    {
+        $this->storage = $storage;
+        $user = auth()->user();
+        $this->user_id = $user->id;
+        $this->region_id = $user->region_id;
+
+    }
     /**
      * Display a listing of the resource.
      */
@@ -38,11 +51,18 @@ class ConnectController extends Controller
                 'receipt_sum' => 'required|numeric|max_digits:15',
                 'SMR' => 'required',
                 'distance_solder' => 'required|numeric|max_digits:15',
+                'images' => 'required|array',
             ]);
         }else{
             $request->validate([
-               'clientNo' => 'required|numeric|min_digits:6|max_digits:15',
+                'clientNo' => 'required|numeric|min_digits:6|max_digits:15',
+                'images' => 'required|array',
             ]);
+        }
+
+        $files = [];
+        foreach ($request->file('images') as $file) {
+            $files[] = $this->storage->loadMore($file, (string) $claim->docs->claim);
         }
 
         Connect::create([
@@ -54,6 +74,7 @@ class ConnectController extends Controller
             'receipt_sum' => $request->input('receipt_sum'),
             'SMR' => $request->input('SMR'),
             'distance_solder' => $request->input('distance_solder'),
+            'images' => $files,
         ]);
 
         $claim->update(['status' => 5]);

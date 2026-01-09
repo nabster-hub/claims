@@ -11,6 +11,7 @@ use App\Models\ConnectPoint;
 use App\Models\Docs;
 use App\Models\Region;
 use App\Models\User;
+use App\Services\FileStorage;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -20,11 +21,14 @@ use Illuminate\Pagination\Paginator;
 class ClaimController extends Controller
 {
     use AuthorizesRequests;
+
+    private $storage;
     private int $user_id;
     private int $region_id;
 
-    public function __construct()
+    public function __construct(FileStorage $storage)
     {
+        $this->storage = $storage;
         $user = auth()->user();
         $this->user_id = $user->id;
         $this->region_id = $user->region_id;
@@ -113,7 +117,7 @@ class ClaimController extends Controller
     public function store(ClaimRequest $request)
     {
         $validated = $request->validated();
-        $FileUpload = new FileController();
+
 
         $user_id = auth()->id();
         $user = User::find($user_id)->with('region')->first();
@@ -143,19 +147,19 @@ class ClaimController extends Controller
         $files = [];
 
         if($request->hasFile('claim')){
-            $files['claim'] = $FileUpload->upload($request->file('claim'), $region_id, $user_id, (string) $query->id);
+            $files['claim'] = $this->storage->upload($request->file('claim'), $region_id, $user_id, (string) $query->id);
         }
 
         if($request->hasFile('questionnaire')){
-            $files['questionnaire'] = $FileUpload->upload($request->file('questionnaire'), $region_id, $user_id, (string) $query->id);
+            $files['questionnaire'] = $this->storage->upload($request->file('questionnaire'), $region_id, $user_id, (string) $query->id);
         }
 
         if($request->hasFile('cal_power')){
-            $files['cal_power'] = $FileUpload->upload($request->file('cal_power'), $region_id, $user_id, (string) $query->id);
+            $files['cal_power'] = $this->storage->upload($request->file('cal_power'), $region_id, $user_id, (string) $query->id);
         }
 
         if($request->hasFile('CTD')){
-            $files['CTD'] = $FileUpload->upload($request->file('CTD'), $region_id, $user_id, (string) $query->id);
+            $files['CTD'] = $this->storage->upload($request->file('CTD'), $region_id, $user_id, (string) $query->id);
         }
 
         $create = Docs::create([
@@ -219,7 +223,6 @@ class ClaimController extends Controller
     public function stepTwoUpdate(Claim $claim, DocsRequest $request)
     {
         $this->authorize('update', $claim);
-        $FileUpload = new FileController();
 
         $validated = $request->validated();
         $connect = ConnectPoint::create([
@@ -237,10 +240,10 @@ class ClaimController extends Controller
         ]);
 
         if($request->hasFile('tech_offer')){
-            $files['tech_offer'] = $FileUpload->loadMore($request->file('tech_offer'), (string) $claim->docs->claim);
+            $files['tech_offer'] = $this->storage->loadMore($request->file('tech_offer'), (string) $claim->docs->claim);
         }
         if($request->hasFile('OCD')){
-            $files['OCD'] = $FileUpload->loadMore($request->file('OCD'), (string) $claim->docs->claim);
+            $files['OCD'] = $this->storage->loadMore($request->file('OCD'), (string) $claim->docs->claim);
         }
 
         $upData = [
@@ -266,7 +269,6 @@ class ClaimController extends Controller
     public function stepThreeUpdate(Claim $claim, DocsRequest $request)
     {
         $this->authorize('threeStep', $claim);
-        $FileUpload = new FileController();
 
         $validated = $request->validated();
         $claim->update([
@@ -277,7 +279,7 @@ class ClaimController extends Controller
         ]);
 
         if($request->hasFile('tech_condition')){
-            $files['tech_condition'] = $FileUpload->loadMore($request->file('tech_condition'), (string) $claim->docs->claim);
+            $files['tech_condition'] = $this->storage->loadMore($request->file('tech_condition'), (string) $claim->docs->claim);
         }
 
 
@@ -291,7 +293,6 @@ class ClaimController extends Controller
     public function update(Claim $claim, ClaimRequest $request)
     {
         $this->authorize('update', $claim);
-        $FileUpload = new FileController();
 
         $data = array_filter($request->validated(), function ($value){
             return !is_null($value);
@@ -303,8 +304,8 @@ class ClaimController extends Controller
 
         try {
             foreach ($request->allFiles() as $key => $file) {
-                $files[$key] = $FileUpload->loadMore($request->file($key), (string) $claim->docs->claim);
-                $FileUpload->destroy($claim->docs->$key);
+                $files[$key] = $this->storage->loadMore($request->file($key), (string) $claim->docs->claim);
+                $this->storage->destroy($claim->docs->$key);
                 $claim->docs()->update([$key => $files[$key]]);
             }
 
@@ -342,7 +343,6 @@ class ClaimController extends Controller
     public function updateTech(Claim $claim, DocsRequest $request)
     {
         $this->authorize('updateTech', $claim);
-        $FileUpload = new FileController();
 
         $validated = $request->validated();
 
@@ -350,8 +350,8 @@ class ClaimController extends Controller
 
         try {
             foreach ($request->allFiles() as $key => $file) {
-                $files[$key] = $FileUpload->loadMore($request->file($key), (string) $claim->docs->claim);
-                $FileUpload->destroy($claim->docs->$key);
+                $files[$key] = $this->storage->loadMore($request->file($key), (string) $claim->docs->claim);
+                $this->storage->destroy($claim->docs->$key);
                 $claim->docs()->update([$key => $files[$key]]);
             }
 

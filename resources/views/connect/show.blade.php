@@ -22,7 +22,7 @@
                         @if(!$claim->connect)
                         <div class="mb-4"><input type="checkbox" id="lics" /> <span class="mb-4">Подключился</span></div>
 
-                        <form action="{{route('connect.store', $claim->id)}}" method="POST" id="form" class="hidden flex flex-col gap-4">
+                        <form action="{{route('connect.store', $claim->id)}}" method="POST" id="form" class="hidden flex flex-col gap-4" enctype="multipart/form-data">
                             @csrf
                             @method('POST')
                             <label class="text-gray-700" for="clientNo">Лицевой счёт</label>
@@ -40,8 +40,9 @@
                              <input name="SMR" type="text" placeholder="Введите СМР проектной организации"/>
                              <label class="text-gray-700" for="distance_solder">Растояние в метрах до места пайки</label>
                              <input name="distance_solder" type="number" placeholder="Введите растояние в метрах до места пайки"/>
-
                             @endif
+                            <label class="text-gray-700" for="images">Прикрепите изображения</label>
+                            <input name="images[]" type="file" multiple required />
                             <button type="submit" class="px-6 py-3 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Сохранить</button>
                         </form>
                         @else

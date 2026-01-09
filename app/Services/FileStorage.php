@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Services;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class FileController extends Controller
+class FileStorage
 {
-    public function upload(UploadedFile $file, int $region_id, int $user_id, string $unic_folder)
+    public function upload(UploadedFile $file, int $region_id, int $user_id, string $unic_folder) : string
     {
         $uid = Str::random('6');
         $folder = now()->format('Y-m') . "/" . $region_id . "/" . $user_id . '/' . $unic_folder;
@@ -34,6 +33,7 @@ class FileController extends Controller
         $filePath = $file->storeAs($folder, $uid . "_" . $originalName, 'public');
 
         $url = Storage::url($filePath);
+
         return $url;
     }
 

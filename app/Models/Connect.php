@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Connect extends Model
 {
+    protected $casts = [
+        'images' => 'array',
+    ];
     protected $fillable = [
         'claim_id',
         'client',
@@ -14,6 +17,7 @@ class Connect extends Model
         'receipt_number',
         'receipt_sum',
         'distance_solder',
-        'SMR'
+        'SMR',
+        'images'
     ];
 }
