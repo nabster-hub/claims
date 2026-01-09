@@ -49,6 +49,16 @@
                         <div class="mb-4">Подключён Номер Клиента - <span class="bg-green-600">{{$claim->connect->client}}</span> </div>
                         @endif
                     </div>
+                        @if(!empty($claim->connect->images))
+                            <div>
+                                <label class="text-gray-700"> Изображения подключения</label>
+                                <div class="w-full mt-2 py-2  border-gray-700 border-b border-t focus:border-indigo-600">
+                                    @foreach($claim->connect->images as $key => $item)
+                                        <a href="{{$item}}"  target="_blank"><button class="px-6 py-3 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Показать {{$key+1}}</button></a>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endif
                     <div>
                         <label class="text-gray-700">Дней в работе</label>
                         <div class="w-full mt-2 py-2  border-gray-700 border-b border-t focus:border-indigo-600">{{$claim->getWorkingDays()}}</div>

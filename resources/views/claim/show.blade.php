@@ -103,6 +103,16 @@
                                 <label class="text-gray-700" for="tech_condition">Техническое условие</label>
                                 <div class="w-full mt-2 py-2  border-gray-700 border-b border-t focus:border-indigo-600"><a href="{{$claim->docs->tech_condition}}"  target="_blank"><button class="px-6 py-3 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Показать</button></a></div>
                             </div>
+                            @if(!empty($claim->connect->images))
+                                <div>
+                                    <label class="text-gray-700"> Изображения подключения</label>
+                                    <div class="w-full mt-2 py-2  border-gray-700 border-b border-t focus:border-indigo-600">
+                                    @foreach($claim->connect->images as $key => $item)
+                                            <a href="{{$item}}"  target="_blank"><button class="px-6 py-3 bg-gray-600 rounded-md text-white font-medium tracking-wide hover:bg-gray-500">Показать {{$key+1}}</button></a>
+                                    @endforeach
+                                    </div>
+                                </div>
+                            @endif
                         @endif
                     </div>
 
