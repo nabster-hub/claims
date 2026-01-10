@@ -19,6 +19,7 @@
                 <td class="border border-solid border-black font-semibold text-center">Номер квитанции и сумма</td>
                 <td class="border border-solid border-black font-semibold text-center">СМР проектной организации</td>
                 <td class="border border-solid border-black font-semibold text-center">Растояние до пайки м</td>
+                <td class="border border-solid border-black font-semibold text-center">Перейти в заявление</td>
             </tr>
             </thead>
             <tbody>
@@ -74,6 +75,9 @@
                         @if($claim->connect->distance_solder)
                             {{$claim->connect->distance_solder." м."}}
                         @endif
+                    </td>
+                    <td class="border border-solid border-black pl-1">
+                        <a href="{{route('connect.show', $claim->id)}}" target="_blank" class="underline text-blue-500" > Перейти </a>
                     </td>
                 </tr>
             @php $i++; @endphp
