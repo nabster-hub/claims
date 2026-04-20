@@ -9,17 +9,18 @@
                 <td class="border border-solid border-black font-semibold text-center">№</td>
                 <td class="border border-solid border-black font-semibold text-center">ФИО Наименование организации</td>
                 <td class="border border-solid border-black font-semibold text-center">Адрес объекта</td>
+                <td class="border border-solid border-black font-semibold text-center">Дата поступления заявки</td>
                 <td class="border border-solid border-black font-semibold text-center">Дата выдачи тех. условия</td>
                 <td class="border border-solid border-black font-semibold text-center">№ тех. условия</td>
                 <td class="border border-solid border-black font-semibold text-center">Телефон Контакты</td>
                 <td class="border border-solid border-black font-semibold text-center">Мощность кВт</td>
                 <td class="border border-solid border-black font-semibold text-center">Точка подключения</td>
-                <td class="border border-solid border-black font-semibold text-center">Л/С</td>
-                <td class="border border-solid border-black font-semibold text-center">Дата и номер АКТа разграничения</td>
-                <td class="border border-solid border-black font-semibold text-center">Номер квитанции оплаты</td>
-                <td class="border border-solid border-black font-semibold text-center">Сумма оплаты</td>
-                <td class="border border-solid border-black font-semibold text-center">СМР проектной организации</td>
-                <td class="border border-solid border-black font-semibold text-center">Растояние до пайки</td>
+{{--                <td class="border border-solid border-black font-semibold text-center">Л/С</td>--}}
+{{--                <td class="border border-solid border-black font-semibold text-center">Дата и номер АКТа разграничения</td>--}}
+{{--                <td class="border border-solid border-black font-semibold text-center">Номер квитанции оплаты</td>--}}
+{{--                <td class="border border-solid border-black font-semibold text-center">Сумма оплаты</td>--}}
+{{--                <td class="border border-solid border-black font-semibold text-center">СМР проектной организации</td>--}}
+{{--                <td class="border border-solid border-black font-semibold text-center">Растояние до пайки</td>--}}
             </tr>
             </thead>
             <tbody>
@@ -29,6 +30,8 @@
                     <td class="border border-solid border-black text-center">{{$i}}</td>
                     <td class="border border-solid border-black pl-1">{{$claim->full_name}}</td>
                     <td class="border border-solid border-black pl-1">{{$claim->address}}</td>
+                    <td class="border border-solid border-black pl-1">{{$claim->created_at->format('d.m.Y')}}</td>
+
                     <td class="border border-solid border-black pl-1">
                         @if($claim->reg_date)
                         {{\Carbon\Carbon::parse($claim->reg_date)->format('d.m.Y')}}
