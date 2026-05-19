@@ -22,6 +22,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/claim/create', function () { //временный фикс
+        return redirect('/');
+    });
    Route::get('/', [ClaimController::class, 'index'])->name('dashboard');
    Route::get('/create', [ClaimController::class, 'create'])->name('claim.create');
    Route::get("/claims", [ClaimController::class, 'allClaims'])->name('claim.index');
@@ -39,7 +42,6 @@ Route::middleware('auth')->group(function () {
    Route::put('/claim/{claim}/tech', [ClaimController::class, 'updateTech'])->name('claim.updateTech');
    Route::delete('/claim/{claim}', [ClaimController::class, 'destroy'])->name('claim.destroy');
    Route::put('/claim/{claim}', [ClaimController::class, 'update'])->name('claim.update');
-
 });
 
 Route::prefix('connect')->middleware('auth')->group(function () {
